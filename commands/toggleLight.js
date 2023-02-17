@@ -1,23 +1,33 @@
-const { SlashCommandBuilder, InteractionResponse, InteractionResponseType } = require('discord.js');
-const { SerialPort } = require("serialport");
-
-const serialPort = new SerialPort({path: "/dev/ttyACM3", baudRate: 115200});
+const { SlashCommandBuilder } = require('discord.js');
+const microbitserial = require("../microbitserial/write-microbit");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('toggle-light')
         .setDescription("Doesn't toggle the light, didn't expect that did ya?")
-        .addIntegerOption(option => 
+        .addIntegerOption(option =>
             option.setName("color")
-            .setDescription("Light color")
-            .setMaxValue(10)
-            .setMinValue(1)
-            .setRequired(true)),
+            .setDescription("Color for the led strip")
+            .addChoices(
+                { name: "red", value: 1},
+                { name: "orange", value: 2},
+                { name: "yellow", value: 3},
+                { name: "green", value: 4},
+                { name: "blue", value: 5},
+                { name: "indigo", value: 6},
+                { name: "biolet", value: 7},
+                { name: "purple", value: 8},
+                { name: "white", value: 9}
+            )
+        ),
     async execute(interaction) {
-        const input = interaction.options.getInteger("color");
+        let input = interaction.options.getInteger("color", false);
 
-        serialPort.write(`${input}`);
+        if (!input)
+            input = 9;
 
-        await interaction.reply('Did thayut 👍');
+        microbitserial.write(`${input}`);
+
+        await interaction.reply(`Wrote ${input} to microbit`);
     },
 };

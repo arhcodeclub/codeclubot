@@ -36,7 +36,8 @@ const discord_js_1 = require("discord.js");
 const dotenv = __importStar(require("dotenv"));
 const fs = __importStar(require("node:fs"));
 const path = __importStar(require("node:path"));
-dotenv.config({ path: __dirname + "/.env" });
+const root_1 = require("./root");
+dotenv.config({ path: root_1.appRoot + "/.env" });
 const token = process.env.TOKEN;
 const client = new discord_js_1.Client({ intents: [discord_js_1.GatewayIntentBits.Guilds] });
 const globalCommands = new discord_js_1.Collection();
@@ -44,10 +45,9 @@ const commandsPath = path.join(__dirname, "commands");
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith("js"));
 function putCommandsGlobal() {
     return __awaiter(this, void 0, void 0, function* () {
-        var _a;
         for (const file of commandFiles) {
             const filePath = path.join(commandsPath, file);
-            const command = yield (_a = filePath, Promise.resolve().then(() => __importStar(require(_a))));
+            const command = yield import(filePath);
             globalCommands.set(command.data.name, command);
         }
     });

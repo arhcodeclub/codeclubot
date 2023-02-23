@@ -1,8 +1,9 @@
 import { REST, Routes } from "discord.js";
 import * as dotenv from "dotenv";
 import * as fs from "fs";
+import { appRoot } from "./root";
 
-dotenv.config();
+dotenv.config({ path: appRoot + "/.env" });
 
 const guildId = process.env.GUILDID!;
 const clientId = process.env.CLIENTID!;
@@ -12,16 +13,16 @@ const token = process.env.TOKEN!;
 const rest = new REST({ version: '10' }).setToken(token);
 
 const commands: Array<String> = [];
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync(__dirname + '/commands').filter(file => file.endsWith('.js'));
 
 async function parseCommands(): Promise<void> {
 
     // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
     for (const file of commandFiles) {
 
-        const command = await import(`./commands/${file}`);
+        const command = await import(`${__dirname}/commands/${file}`);
         commands.push(command.data.toJSON());
-        
+
     }
 
 }
@@ -34,7 +35,7 @@ async function main(): Promise<void> {
 
         const data = await rest.put(
 			Routes.applicationGuildCommands(clientId, guildId),
-			{ body: commands },
+			{ body: JSON.stringify(commands) },
 		);
 
         // const data = await rest.put(

@@ -3,8 +3,11 @@ import * as dotenv from "dotenv";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { DiscordCommandModule } from "./commands/types";
+import { appRoot } from "./root";
 
-dotenv.config({ path: __dirname + "/.env" });
+console.log(appRoot + "/.env");
+
+dotenv.config({ path: appRoot + "/.env" });
 
 const token = process.env.TOKEN!;
 

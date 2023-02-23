@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "run": "node build/index.js"
+    "dev": "tsc --watch",
+    "deploy": "node build/index.js",
+    "deploy-commands": "node build/deploy-commands.js"
   },
   "author": "Coenicorn",
   "license": "MIT",
@@ -15,6 +17,8 @@
     "serialport": "^10.5.0"
   },
   "devDependencies": {
+    "@discordjs/rest": "^1.5.0",
+    "discord-api-types": "^0.37.35",
     "typescript": "^4.9.5"
   }
 }

@@ -35,7 +35,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 const dotenv = __importStar(require("dotenv"));
 const fs = __importStar(require("fs"));
-dotenv.config();
+const root_1 = require("./root");
+dotenv.config({ path: root_1.appRoot + "/.env" });
 const guildId = process.env.GUILDID;
 const clientId = process.env.CLIENTID;
 const token = process.env.TOKEN;
@@ -45,10 +46,9 @@ const commands = [];
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 function parseCommands() {
     return __awaiter(this, void 0, void 0, function* () {
-        var _a;
         // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
         for (const file of commandFiles) {
-            const command = yield (_a = `./commands/${file}`, Promise.resolve().then(() => __importStar(require(_a))));
+            const command = yield import(`./commands/${file}`);
             commands.push(command.data.toJSON());
         }
     });

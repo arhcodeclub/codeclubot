@@ -1,5 +1,6 @@
-import { SerialPort } from "serialport";
-import * as config from "./config.json";
+const { SerialPort } = require("serialport");
+const config = require("./config.json");
+
 
 const microbitserial = new SerialPort({
     path: config.devicePath,

@@ -1,8 +1,7 @@
-import { CommandInteraction, SlashCommandBuilder } from "discord.js";
-import * as microbitserial from "../microbitserial/write-microbit";
-import { DiscordCommandModule } from "./types";
+const { SlashCommandBuilder } = require('discord.js');
+const microbitserial = require("../microbitserial/write-microbit");
 
-export const command: DiscordCommandModule = {
+module.exports = {
     data: new SlashCommandBuilder()
         .setName('toggle-light')
         .setDescription("Doesn't toggle the light, didn't expect that did ya?")
@@ -21,17 +20,14 @@ export const command: DiscordCommandModule = {
                 { name: "white", value: 9}
             )
         ),
-    async execute(interaction: CommandInteraction) {
-        let input = interaction.options.get("color")?.value;
+    async execute(interaction) {
+        let input = interaction.options.getInteger("color", false);
 
         if (!input)
             input = 9;
 
         microbitserial.write(`${input}`);
 
-        await interaction.reply({ 
-            content: `Wrote ${input} to microbit`,
-            ephemeral: true,
-        });
+        await interaction.reply(`Wrote ${input} to microbit`);
     },
 };

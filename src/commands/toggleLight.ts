@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+import { CommandInteraction, SlashCommandBuilder } from "discord.js";
 const microbitserial = require("../microbitserial/write-microbit");
 
 module.exports = {
@@ -20,14 +20,17 @@ module.exports = {
                 { name: "white", value: 9}
             )
         ),
-    async execute(interaction) {
-        let input = interaction.options.getInteger("color", false);
+    async execute(interaction: CommandInteraction) {
+        let input = interaction.options.get("color")?.value;
 
         if (!input)
             input = 9;
 
         microbitserial.write(`${input}`);
 
-        await interaction.reply(`Wrote ${input} to microbit`);
+        await interaction.reply({ 
+            content: `Wrote ${input} to microbit`,
+            ephemeral: true,
+        });
     },
 };

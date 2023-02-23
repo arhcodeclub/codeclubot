@@ -4,7 +4,8 @@
   "description": "The CodeCluBot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "run": "node build/index.js"
   },
   "author": "Coenicorn",
   "license": "MIT",
@@ -12,5 +13,8 @@
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
     "serialport": "^10.5.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
   }
 }

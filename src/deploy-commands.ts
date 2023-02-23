@@ -30,12 +30,14 @@ async function parseCommands(): Promise<void> {
 async function main(): Promise<void> {
     await parseCommands();
 
+    console.log(commands);
+
     try {
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
         const data = await rest.put(
 			Routes.applicationGuildCommands(clientId, guildId),
-			{ body: JSON.stringify(commands) },
+			{ body: commands },
 		);
 
         // const data = await rest.put(

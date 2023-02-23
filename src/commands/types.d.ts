@@ -1,7 +1,9 @@
-import { Interaction, SlashCommandBuilder } from "discord.js";
+import { CommandInteraction, SlashCommandBuilder } from "discord.js";
+
+// All commands should have this interface
 
 export interface DiscordCommandModule
 {
     data: SlashCommandBuilder;
-    execute: (interaction: Interaction) => void;
+    execute: (interaction: CommandInteraction) => void;
 }

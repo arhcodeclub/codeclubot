@@ -23,7 +23,9 @@ async function putCommandsGlobal(): Promise<void>
     {
 
         const filePath = path.join(commandsPath, file);
-        const command = await import(filePath) as DiscordCommandModule;
+        const command = await import(filePath);
+
+        console.log(command.default);
 
         globalCommands.set(command.data.name, command);
 
@@ -32,7 +34,7 @@ async function putCommandsGlobal(): Promise<void>
 
 client.on(Events.InteractionCreate, async interaction => {
 
-    if (!interaction.isCommand() || interaction.isChatInputCommand()) return;
+    if (!interaction.isCommand()) return;
 
     const command = globalCommands.get(interaction.commandName);
 

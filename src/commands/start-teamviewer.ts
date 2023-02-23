@@ -1,8 +1,8 @@
 import { CommandInteraction, SlashCommandBuilder } from "discord.js";
-const fs = require("fs");
-import { exec } from "child_process"
+import { exec } from "child_process";
+import { DiscordCommandModule } from "./types";
 
-module.exports = {
+export const command: DiscordCommandModule = {
 	data: new SlashCommandBuilder()
 		.setName('start-teamviewer')
 		.setDescription('Starts teamviewer if it isn not open already.'),

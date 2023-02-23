@@ -1,7 +1,8 @@
 import { CommandInteraction, SlashCommandBuilder } from "discord.js";
-const microbitserial = require("../microbitserial/write-microbit");
+import * as microbitserial from "../microbitserial/write-microbit";
+import { DiscordCommandModule } from "./types";
 
-module.exports = {
+export const command: DiscordCommandModule = {
     data: new SlashCommandBuilder()
         .setName('toggle-light')
         .setDescription("Doesn't toggle the light, didn't expect that did ya?")

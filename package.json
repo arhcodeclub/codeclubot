@@ -1,0 +1,16 @@
+{
+  "name": "codeclubot",
+  "version": "1.0.0",
+  "description": "The CodeCluBot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Coenicorn",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "serialport": "^10.5.0"
+  }
+}

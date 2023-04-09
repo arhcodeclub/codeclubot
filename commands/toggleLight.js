@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-const microbitserial = require("../microbitserial/write-microbit");
+const serialport = require("../serialconnection/serialconnection");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -26,7 +26,9 @@ module.exports = {
         if (!input)
             input = 9;
 
-        microbitserial.write(`${input}`);
+        serialport.open((err) => {
+            if (!err) serialport.write(input);
+        });
 
         await interaction.reply(`Wrote ${input} to microbit`);
     },

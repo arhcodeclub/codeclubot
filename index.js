@@ -53,5 +53,7 @@ client.once(Events.ClientReady, (c) => {
   console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
+client.on(Events.Error, console.error);
+
 // Log in to Discord with your client's token
 client.login(token);

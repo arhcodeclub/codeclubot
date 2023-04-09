@@ -22,9 +22,7 @@ module.exports = {
         )
     ),
   async execute(interaction) {
-    let input = interaction.options.getInteger('color', false);
-
-    if (!input) input = 9;
+    let input = interaction.options.getInteger('color') ?? 9;
 
     serialport.open((err) => {
       if (!err) serialport.write(input);

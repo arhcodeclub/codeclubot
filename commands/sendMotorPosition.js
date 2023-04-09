@@ -5,13 +5,13 @@ const numberbytes = require('../util/number-bytes');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('set-motor-position')
-    .setDescription('Sets motor position to value from 0 to 180')
+    .setDescription('Sets motor position to value ranging from 0 to 180')
     .addIntegerOption((option) =>
       option
         .setName('position')
         .setDescription('Position for the motor')
-        .setMaxValue(180)
         .setMinValue(0)
+        .setMaxValue(180)
         .setRequired(true)
     ),
   async execute(interaction) {

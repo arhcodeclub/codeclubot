@@ -1,13 +1,12 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { fork, exec } = require('child_process');
-const fs = require('fs');
+const { exec } = require('child_process');
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('start-teamviewer')
-    .setDescription('Starts teamviewer if it isn not open already.'),
+    .setDescription('Starts teamviewer if it is not open already.'),
   async execute(interaction) {
-    const prc = exec(`screen -dm teamviewer -X "teamviewer"`);
+    exec(`screen -dm teamviewer -X "teamviewer"`);
 
     await interaction.reply('Did thayut');
   },

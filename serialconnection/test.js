@@ -1,3 +1,3 @@
-const port = require("./serialconnection");
+const port = require('./serialconnection');
 
-port.write("h");
+port.write('h');

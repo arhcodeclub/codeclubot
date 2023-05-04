@@ -1,10 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
-const fs = require("node:fs");
-const path = require("path");
-
-const 
-    imagedir = path.join(__dirname, "/image"),
-    latestImageName = "latest.png";
+const fetch = require("fetch");
+const nconf = require("nconf");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -12,23 +8,7 @@ module.exports = {
         .setDescription('Shows last image taken by picamera'),
     async execute(interaction) {
 
-        const files = await fs.readdirSync(imagedir);
-
-        if (!files.includes(latestImageName)) {
-            // interaction.channel.send(`${latestImageName} does not exist`);
-            interaction.reply({
-                content: `No image present`,
-                ephemeral: true
-            });
-
-            return;
-        }
-
-        const response = await interaction.reply({
-            ephemeral: true,
-            content: "latest image",
-            files: [{ attachment: (path.join(imagedir, latestImageName)) }],
-        });
+        // TODO get image from url endpoint
 
     },
 };

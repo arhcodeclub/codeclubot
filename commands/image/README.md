@@ -1,3 +1,3 @@
-this folder should contain picam.py, README.md and an optional latest.png.
+# Image
 
-*No more .png files should be present*
+this folder should contain `picam.py`, `README.md`, `default.png` and an optional `latest.png`.

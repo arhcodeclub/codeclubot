@@ -16,7 +16,10 @@ module.exports = {
 
         if (!files.includes(latestImageName)) {
             // interaction.channel.send(`${latestImageName} does not exist`);
-            interaction.reply(`${latestImageName} does not exist`);
+            interaction.reply({
+                content: `No image present`,
+                ephemeral: true
+            });
 
             return;
         }

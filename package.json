@@ -4,13 +4,17 @@
   "description": "The CodeCluBot",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --no-warnings index.js",
+    "refresh": "node deploy-commands.js",
+    "dev": "nodemon index.js"
   },
   "author": "Coenicorn",
   "license": "MIT",
   "dependencies": {
     "discord.js": "^14.9.0",
     "dotenv": "^16.0.3",
+    "nodemon": "^2.0.22",
     "serialport": "^10.5.0"
   }
 }

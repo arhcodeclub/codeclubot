@@ -9,7 +9,13 @@ dotenv.config();
 const token = process.env.TOKEN;
 
 // Create a new client instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMessageReactions
+] });
+
 client.commands = new Collection();
 
 const commandsPath = path.join(__dirname, 'commands');
@@ -26,6 +32,15 @@ for (const file of commandFiles) {
     }
 }
 
+async function commandError(interaction) {
+    if (interaction.replied) return;
+
+    const response = await interaction.reply({
+        content: 'There was an error while executing this command!',
+        ephemeral: true,
+    });
+}
+
 client.on(Events.InteractionCreate, async (interaction) => {
     if (!interaction.isChatInputCommand()) return;
 
@@ -33,6 +48,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
     if (!command) {
         console.error(`No command matching ${interaction.commandName} was found.`);
+        
+        commandError(interaction);
+
         return;
     }
 
@@ -40,10 +58,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
         await command.execute(interaction);
     } catch (error) {
         console.error(error);
-        await interaction.reply({
-            content: 'There was an error while executing this command!',
-            ephemeral: true,
-        });
+        
+        commandError(interaction);
     }
 });
 

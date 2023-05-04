@@ -10,7 +10,7 @@ picam2.start()
 
 while 1:
 
-	metadata = picam2.capture_file("last.jpeg")
+	metadata = picam2.capture_file("latest.jpeg")
 
 	time.sleep(1)
 

@@ -92,7 +92,7 @@ function run() {
             {
                 let len = message.content.toLowerCase().split("c").length - 1;
                 
-                if (len == 0) return;
+                if (len == 0) return; /* if string does not contain 'c', return */
 
                 let chance = (98 - Math.log(len)*4);
                 let rand = Math.random() * 100;
@@ -102,10 +102,9 @@ function run() {
                     
                     if (len >= cStrings.length) len = cStrings.length - 1;
 
-                    msg = `Hij wilde '**${message.content}**' zeggen, maar zijn liefde voor javascript werd hem even te veel o7\n\n${cStrings[cStringI]}`;
+                    msg = `Waarom '**${message.content}**' als je ook\n# JAVASCRIPT\n kan zeggen?\n\n${cStrings[cStringI]}`;
                     
                     message.delete();
-
                     message.channel.send(msg);
                 }
 

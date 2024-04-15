@@ -94,13 +94,14 @@ function run() {
                 
                 if (len == 0) return; /* if string does not contain 'c', return */
 
+                // some funky math ^_^
                 let chance = (98 - Math.log(len)*4);
                 let rand = Math.random() * 100;
 
                 if (rand > chance) 
                 {
                     
-                    if (len >= cStrings.length) len = cStrings.length - 1;
+                    if (len >= cStrings.length) len = cStrings.length - 1; /* array bounds check */
 
                     msg = `'${message.content}', more like \n## JAVASCRIPT\n\n\n${cStrings[len]}`;
                     

@@ -95,8 +95,8 @@ function run() {
                 if (len == 0) return; /* if string does not contain 'c', return */
 
                 // some funky math ^_^
-                let chance = (98 - Math.log(len)*4);
-                let rand = Math.random() * 100;
+                let chance = 0.995;
+                let rand = Math.random();
 
                 if (rand > chance) 
                 {
@@ -111,7 +111,7 @@ function run() {
 
             }
         } catch(e) {console.log(`luckily this code can't really mess things up so it don't matter\n${e}`);}
-    })
+    });
 
     // When the client is ready, run this code (only once)
     // We use 'c' for the event parameter to keep it separate from the already defined 'client'

@@ -1,0 +1,12 @@
+[Unit]
+Description=node codeclubot
+
+[Service]
+Type=exec
+User=root
+ExecStart=node /opt/codeclubot/bot.js
+WorkingDirectory=/opt/codeclubot/
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

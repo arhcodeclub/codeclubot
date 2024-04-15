@@ -88,20 +88,20 @@ function run() {
     // special usecase
     client.on(Events.MessageCreate, (message) => {
         try {
-            if (message.member.roles.cache.has('1229147630332805152'))
+            if (message.member.roles.cache.has('1229147630332805152' /* if member has nonprofit+ role */))
             {
                 let len = message.content.toLowerCase().split("c").length - 1;
                 
-                let chance = (98 - Math.log(len)*5);
+                if (len == 0) return;
+
+                let chance = (98 - Math.log(len)*4);
                 let rand = Math.random() * 100;
 
-                // message.channel.send(`chance ${chance}, rand ${rand}`);
-                console.log(`chance ${chance}, rand ${rand}, len ${len}`);
-
-                if (rand > chance && len > 0)
+                if (rand > chance) 
                 {
                     
-                    let cStringI = (len >= cStrings.length) ? cStrings.length - 1 : len;
+                    if (len >= cStrings.length) len = cStrings.length - 1;
+
                     msg = `Hij wilde '**${message.content}**' zeggen, maar zijn liefde voor javascript werd hem even te veel o7\n\n${cStrings[cStringI]}`;
                     
                     message.delete();

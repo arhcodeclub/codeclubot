@@ -103,7 +103,7 @@ function run() {
                     
                     if (len >= cStrings.length) len = cStrings.length - 1; /* array bounds check */
 
-                    msg = `'${message.content.substring(50)}', more like \n## JAVASCRIPT\n\n\n${cStrings[len]}`;
+                    msg = `'${message.content.substring(0, 50)}', more like \n## JAVASCRIPT\n\n\n${cStrings[len]}`;
                     
                     message.delete();
                     message.channel.send(msg);

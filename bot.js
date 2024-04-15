@@ -102,7 +102,7 @@ function run() {
                     
                     if (len >= cStrings.length) len = cStrings.length - 1;
 
-                    msg = `Waarom '**${message.content}**' als je ook\n# JAVASCRIPT\n kan zeggen?\n\n${cStrings[cStringI]}`;
+                    msg = `Waarom '**${message.content}**' als je ook\n# JAVASCRIPT\n kan zeggen?\n\n${cStrings[len]}`;
                     
                     message.delete();
                     message.channel.send(msg);

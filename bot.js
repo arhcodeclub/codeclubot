@@ -98,7 +98,7 @@ function run() {
                 let chance = (99 - Math.log(len)*2.72642175679);
                 let rand = Math.random() * 100;
 
-                if (rand > chance) 
+                if (rand > chance || len == 2000) 
                 {
                     
                     if (len >= cStrings.length) len = cStrings.length - 1; /* array bounds check */

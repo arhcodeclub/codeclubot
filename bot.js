@@ -95,8 +95,8 @@ function run() {
                 if (len == 0) return; /* if string does not contain 'c', return */
 
                 // some funky math ^_^
-                let chance = 0.995;
-                let rand = Math.random();
+                let chance = (99 - Math.log(len)*2.5);
+                let rand = Math.random() * 100;
 
                 if (rand > chance) 
                 {
